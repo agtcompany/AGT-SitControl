@@ -181,7 +181,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
       }
       else {
         
-      //      BTFind = false
+            BTFind = false
        //     infoBTLabel.text! += "Соединение не установлено \r"
       }
  
