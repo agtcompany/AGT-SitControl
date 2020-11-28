@@ -26,13 +26,36 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
 class ViewController: UIViewController, CBCentralManagerDelegate,
                       CBPeripheralDelegate {
     
-/*
-// Организация функции по таймеру
-    let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
-        tiki += 1
-        print("Таймер! \(tiki)")
-    }
- */
+    var manager:CBCentralManager!
+    var peripheral:CBPeripheral!
+    var characteristic: CBCharacteristic?
+    
+    
+    var selectedMassage = 0
+    var numberSelectedSit = 0
+    var sendNumber = 0
+    var valueSend: [UInt8] = []
+    var BTConnect = false
+    var BTFind = false
+    var pressedCB = false
+    let BTName = "AGT-SITCONTROL-"
+    let BT_SCRATCH_UUID = CBUUID(string: "FFE1")
+    let BT_SERVICE_UUID = CBUUID(string: "FFE0")
+    
+    var sit = Array(repeating: Sit(), count: 8)
+    
+    @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var timeMassageLabel: UILabel!
+   
+    @IBOutlet var playPauseButton: UIButton!
+    @IBOutlet var stopButton: UIButton!
+    @IBOutlet var replayButton: UIButton!
+    
+    @IBOutlet var goButtonLabel: UIButton!
+    @IBOutlet var disconnectButtonLabel: UIButton!
+    @IBOutlet var connectButtonLabel: UIButton!
+
+    @IBOutlet weak var massageProgramButton: UIButton!
     
     struct Sit {
         let numberMem = 3
@@ -48,9 +71,18 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
                     pressureMem[index].append(0)
                 }
             }
-            
         }
     }
+    
+    
+/*
+    // Организация функции по таймеру
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+            tiki += 1
+            print("Таймер! \(tiki)")
+        }
+*/
+    
 // Организация всплывающей таблицы выбора программы массажа
     private func setupGestures(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
@@ -73,40 +105,34 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     
     
     
-    var manager:CBCentralManager!
-    var peripheral:CBPeripheral!
-    var characteristic: CBCharacteristic?
-    
-    
-    var selectedMassage = 0
-    var numberSelectedSit = 0
-    var sendNumber = 0
-    var valueSend: [UInt8] = []
-    var BTConnect = false
-    var BTFind = false
-    var pressedCB = false
-    let BTName = "AGT-SitContol-"
-    let BT_SCRATCH_UUID = CBUUID(string: "FFE1")
-    let BT_SERVICE_UUID = CBUUID(string: "FFE0")
-    
-    var sit = Array(repeating: Sit(), count: 8)
-    
-    @IBOutlet var infoLabel: UILabel!
-    @IBOutlet var infoBTLabel: UILabel!
-    
-    @IBOutlet var goButtonLabel: UIButton!
-    @IBOutlet var disconnectButtonLabel: UIButton!
-    @IBOutlet var connectButtonLabel: UIButton!
 
-    @IBOutlet weak var massageProgramButton: UIButton!
-    
    
     
     func modButton() {
         infoLabel.layer.borderColor = UIColor.systemGray2.cgColor
         infoLabel.layer.borderWidth = 1
+        
+        playPauseButton.layer.cornerRadius =   playPauseButton.frame.size.height / 4
+        playPauseButton.layer.borderColor = UIColor.blue.cgColor
+        playPauseButton.layer.borderWidth = 3
+        playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        
+        stopButton.layer.cornerRadius =   stopButton.frame.size.height / 4
+        stopButton.layer.borderColor = UIColor.blue.cgColor
+        stopButton.layer.borderWidth = 3
+        stopButton.isEnabled = false
+        
+        replayButton.layer.cornerRadius =   replayButton.frame.size.height / 4
+        replayButton.layer.borderColor = UIColor.blue.cgColor
+        replayButton.layer.borderWidth = 3
 
-        goButtonLabel.layer.cornerRadius =   goButtonLabel.frame.size.height / 4
+        timeMassageLabel.layer.borderColor = UIColor.blue.cgColor
+        timeMassageLabel.layer.borderWidth = 3
+        
+        goButtonLabel.setTitleColor(UIColor.black, for: UIControl.State.disabled)
+        goButtonLabel.clipsToBounds = true
+        
+        goButtonLabel.layer.cornerRadius = goButtonLabel.frame.size.height / 4
         goButtonLabel.layer.borderColor = UIColor.blue.cgColor
         goButtonLabel.layer.borderWidth = 3
         goButtonLabel.setTitle("Send", for: .normal)
@@ -145,7 +171,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         if central.state == CBManagerState.poweredOn {
             central.scanForPeripherals(withServices: nil, options: nil)
             
-            infoBTLabel.text = "BT turn ON. Searching...\n"
+            infoLabel.text = "Поиск и установление соединения с сидением \(numberSelectedSit + 1) . . ."
         }
         else {
             let alertBTOff = UIAlertController (title: "ВНИМАНИЕ ! Bluetooth выключен !", message: "Для работы приложения необходимо включить в настройках функцию Bluetooth.", preferredStyle: .alert)
@@ -169,19 +195,15 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
  
       if device?.contains("\(BTName)" + "\(numberSelectedSit)") == true {
             BTFind = true
-    //        infoBTLabel.text! += "\(peripheral.name!) найдено RSSI = \(RSSI) дБ. Установить?"
             self.manager.stopScan()
             self.peripheral = peripheral
             self.peripheral.delegate = self
-            if pressedCB {
-              manager.connect(peripheral, options: nil)
-              pressedCB = false
-              goButtonLabel.isEnabled = true
-            }
+            manager.connect(peripheral, options: nil)
+            infoLabel.text = "Установлено соединение с сидением \(numberSelectedSit + 1)"
+            
       }
       else {
-        
-            BTFind = false
+       //     BTFind = false
        //     infoBTLabel.text! += "Соединение не установлено \r"
       }
  
@@ -190,28 +212,14 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     
     @IBAction func selectSit(_ sender: UISegmentedControl) {
   
-    //    infoBTLabel.text = (" \(sender.selectedSegmentIndex) ")
         numberSelectedSit = sender.selectedSegmentIndex
-        
+        reconnectBT()
         for i1 in 0..<sit[numberSelectedSit].numberMem {
             for i2 in 0..<sit[numberSelectedSit].numberPads {
-                infoBTLabel.text! += (" \(sit[numberSelectedSit].pressureMem[i1][i2] + numberSelectedSit) ")
+  //              infoBTLabel.text! += (" \(sit[numberSelectedSit].pressureMem[i1][i2] + numberSelectedSit) ")
             }
         }
         
-    }
-    
- //  Разорвать соединение, включить поиск, и если найдено, соединить
-    @IBAction func control1Button(_ sender: UIButton) {
-        pressedCB = true
-        reconnectBT()
-        
-    }
-    
- // Разорвать соединение, и включить поиск
-    @IBAction func control2Button(_ sender: UIButton) {
-        pressedCB = false
-        reconnectBT()
     }
     
     func reconnectBT() {
@@ -219,8 +227,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
             manager.cancelPeripheralConnection(peripheral)
         }
         manager.scanForPeripherals(withServices: nil, options: nil)
-        infoBTLabel.text = "BT turn ON. Searching...\n"
-        goButtonLabel.isEnabled = false
+        infoLabel.text = "Поиск и установление соединения с сидением \(numberSelectedSit + 1) . . ."
     }
     
     // Устанавливаем соединение с выбранным переферийным устройством
@@ -229,7 +236,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         didConnect peripheral: CBPeripheral) {
       peripheral.discoverServices(nil)
       BTConnect = true
-      infoBTLabel.text! += "\rСоединение установлено !"
+      infoLabel.text = "Установлено соединение с сидением \(numberSelectedSit + 1)"
     }
     
     // Разрываем соединение и включаем сканирование переферийных устройств
@@ -241,9 +248,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
       peripheral.discoverServices(nil)
       BTConnect = false
       central.scanForPeripherals(withServices: nil, options: nil)
-      infoBTLabel.text = "Соединение разорвано !\nBT turn ON. Searching...\n"
-      goButtonLabel.isEnabled = false
-        
+      infoLabel.text = "Поиск и установление соединения с сидением \(numberSelectedSit + 1) . . ."
     }
 
     // Опознаем характеристики переферийного устройства
@@ -259,7 +264,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
                   let data = NSData(bytes: &valueSend, length: valueSend.count)
         //                                      MemoryLayout<UInt8>.size)
                   peripheral.writeValue(data as Data, for: characteristic,type: CBCharacteristicWriteType.withoutResponse)
-                  infoBTLabel.text = "\r 5) Send \(valueSend) "
+   //               infoBTLabel.text = "\r 5) Send \(valueSend) "
                   valueSend = []
                }
             }
@@ -274,11 +279,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         if characteristic.uuid == BT_SCRATCH_UUID {
             if let charac1 = characteristic.value {
                 if let content = String(data: charac1, encoding: String.Encoding.utf8) {
-                    infoBTLabel.text = "\r 4) \(content) \n \(charac1) \n"
+  //                  infoBTLabel.text = "\r 4) \(content) \n \(charac1) \n"
                     var icn = 0
                     for codeUnit in content.utf8 {
                         let st = String(format:"%02X", codeUnit)
-                        infoBTLabel.text! += "\(st):\(charac1[icn]), "
+  //                      infoBTLabel.text! += "\(st):\(charac1[icn]), "
                         icn += 1
                     }
                     
@@ -313,11 +318,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
       for service in peripheral.services! {
         _ = service as CBService
 
-        infoBTLabel.text! += "\r 1) \(service.uuid)"
-
         if service.uuid == BT_SERVICE_UUID {
           peripheral.discoverCharacteristics(nil, for: service)
-          infoBTLabel.text! += "\r 2) \(peripheral.services!)"
         }
       }
     }
