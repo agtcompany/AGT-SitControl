@@ -14,11 +14,17 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.isScrollEnabled = false
+        
     }
     
     // Определяем размер таблицы
     override func viewWillLayoutSubviews() {
-        preferredContentSize = CGSize(width:  massageProgramButtonWidth, height: tableView.contentSize.height)
+        if selectedTable < 3 {
+          preferredContentSize = CGSize(width:  forTableButtonWidth + 15 , height: tableView.contentSize.height - 15)
+        }
+        else {
+            preferredContentSize = CGSize(width:  forTableButtonWidth + 15 , height: tableView.contentSize.height)
+        }
     }
 
     // Определяем количество секций в таблице
@@ -28,23 +34,57 @@ class TableViewController: UITableViewController {
 
     // Определяем количество строк в секциях
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return massageNames.count
+        switch selectedTable {
+        case 0:
+            return 8
+        case 1:
+            return massageNames.count
+        case 2:
+            return 7
+        case 3...11:
+            return 6
+        default:
+            return 0
+        }
     }
 
     // Определяем содержимое ячеек
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let textData = massageNames[indexPath.row]
-        cell.textLabel?.text = textData
+        cell.textLabel?.textColor = UIColor.white
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.darkGray
+        cell.selectedBackgroundView = bgColorView
+
+
+        switch selectedTable {
+        case 0:
+            cell.textLabel?.text = "Массажное сидение  \(indexPath.row + 1)"
+        case 1:
+            cell.textLabel?.text = massageNames[indexPath.row]
+        case 2:
+            if indexPath.row == 6 {
+                cell.textLabel?.text = "Вернуться к текущим настройкам"
+            }
+            else if indexPath.row < 3 {
+                cell.textLabel?.text = "Установить настройки из памяти \(indexPath.row + 1)"
+            }
+            else {
+                cell.textLabel?.text = "Сохранить настройки в память \(indexPath.row - 2)"
+            }
+        case 3...11:
+            cell.textLabel?.text = "\(indexPath.row)"
+        default:
+            break
+        }
         return cell
     }
     
-    // Определяем номер выбранной ячейки и меняем текст в кнопке на текст выбранной ячейки
+    // Определяем номер выбранной ячейки и запускаем соответствующий обработчик
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        massageProgramButtonRow = indexPath.row
-        NotificationCenter.default.post(name: NSNotification.Name("ChangeNPM"), object: nil)
+        selectedTableRow = indexPath.row
+        NotificationCenter.default.post(name: NSNotification.Name("ChangeBN"), object: nil)
         dismiss(animated: true, completion: nil)
     }
     

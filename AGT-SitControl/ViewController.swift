@@ -9,10 +9,11 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
+var selectedTable = 0
+var selectedTableRow = 0
+var forTableButtonWidth : CGFloat = 0
 
 let massageNames = ["Программа массажа 1", "Программа массажа 2", "Программа массажа 3", "Программа массажа 4", "Программа массажа 5"]
-var massageProgramButtonWidth : CGFloat = 0
-var massageProgramButtonRow = 0
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -20,11 +21,27 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
-
 // var tiki = 0
+
+extension UIButton {
+    func applyBlueBorder() {
+        clipsToBounds = true
+        layer.cornerRadius =  frame.size.height / 4
+        layer.borderColor = UIColor.blue.cgColor
+        layer.borderWidth = 3
+    }
+    func applyWhiteBorder() {
+        clipsToBounds = true
+        layer.cornerRadius =  frame.size.height / 2
+        layer.borderColor = UIColor.white.cgColor
+        layer.borderWidth = 2
+    }
+    
+}
 
 class ViewController: UIViewController, CBCentralManagerDelegate,
                       CBPeripheralDelegate {
+    
     
     var manager:CBCentralManager!
     var peripheral:CBPeripheral!
@@ -46,16 +63,18 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     
     @IBOutlet var infoLabel: UILabel!
     @IBOutlet var timeMassageLabel: UILabel!
-   
+    
     @IBOutlet var playPauseButton: UIButton!
     @IBOutlet var stopButton: UIButton!
     @IBOutlet var replayButton: UIButton!
     
-    @IBOutlet var goButtonLabel: UIButton!
-    @IBOutlet var disconnectButtonLabel: UIButton!
-    @IBOutlet var connectButtonLabel: UIButton!
 
-    @IBOutlet weak var massageProgramButton: UIButton!
+    @IBOutlet var massageProgramButton: UIButton!
+    @IBOutlet var selectSitButton: UIButton!
+    @IBOutlet var memoryButton: UIButton!
+    @IBOutlet var conturButton: [UIButton]!
+    
+    
     
     struct Sit {
         let numberMem = 3
@@ -83,78 +102,76 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         }
 */
     
-// Организация всплывающей таблицы выбора программы массажа
-    private func setupGestures(){
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
-        tapGesture.numberOfTapsRequired = 1
-        massageProgramButton.addGestureRecognizer(tapGesture)
+// Отображаем соответствующее нажатой кнопке всплывающее меню
+    @IBAction func selectedButtonTable(_ sender: UIButton) {
+        selectedTable = Int(sender.restorationIdentifier!)!
+        print("\(selectedTable)")
+        switch selectedTable {
+        case 0: tappedButton(selectSitButton)
+        case 1: tappedButton(massageProgramButton)
+        case 2: tappedButton(memoryButton)
+        case 3...11: tappedConturButton(conturButton[selectedTable-3])
+        default:
+            break
+        }
     }
-    @objc
-    private func tapped() {
+    
+// Организация всплывающей таблицы выбора программы массажа
+/*
+    private func setupGestures(){
+        
+        var tapGesture =  UITapGestureRecognizer(target: self, action: #selector(tapped))
+        tapGesture.numberOfTapsRequired = 1
+        selectSitButton.addGestureRecognizer(tapGesture)
+    }
+ */
+    
+    // Вывод всплывающего меню соответствующей кнопки
+    func tappedButton(_ button : UIButton!){
         guard let popVC = storyboard?.instantiateViewController(withIdentifier: "popVC") else { return }
         popVC.modalPresentationStyle = .popover
         let popOverVC = popVC.popoverPresentationController
         popOverVC?.delegate = self
-        popOverVC?.sourceView = self.massageProgramButton
-        popOverVC?.sourceRect = CGRect(x: self.massageProgramButton.bounds.midX, y: self.massageProgramButton.bounds.maxY, width: 0, height: 0)
-        massageProgramButtonWidth = self.massageProgramButton.bounds.width
-        popVC.preferredContentSize = CGSize(width: self.massageProgramButton.bounds.width, height: 250)
-         
+        popOverVC?.sourceView = button
+        popOverVC?.sourceRect = CGRect(x: button.bounds.midX, y: button.bounds.maxY, width: 0, height: 0)
+        forTableButtonWidth = button.bounds.width
         self.present(popVC, animated: true)
     }
     
+    func tappedConturButton(_ button : UIButton!){
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "popVC") else { return }
+        popVC.modalPresentationStyle = .popover
+        let popOverVC = popVC.popoverPresentationController
+        popOverVC?.delegate = self
+        popOverVC?.sourceView = memoryButton
+        popOverVC?.sourceRect = CGRect(x:  memoryButton.bounds.maxX + 5 , y: memoryButton.bounds.maxY + 155, width: 0, height: 0)
+        forTableButtonWidth = 28 //button.bounds.width
+        self.present(popVC, animated: true)
+    }
     
-    
-
-   
-    
+    // Конфигурация кнопок и меток
     func modButton() {
+        
+        infoLabel.layer.cornerRadius =   infoLabel.frame.size.height / 4
         infoLabel.layer.borderColor = UIColor.systemGray2.cgColor
-        infoLabel.layer.borderWidth = 1
+        infoLabel.layer.borderWidth = 2
         
-        playPauseButton.layer.cornerRadius =   playPauseButton.frame.size.height / 4
-        playPauseButton.layer.borderColor = UIColor.blue.cgColor
-        playPauseButton.layer.borderWidth = 3
-        playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-        
-        stopButton.layer.cornerRadius =   stopButton.frame.size.height / 4
-        stopButton.layer.borderColor = UIColor.blue.cgColor
-        stopButton.layer.borderWidth = 3
-        stopButton.isEnabled = false
-        
-        replayButton.layer.cornerRadius =   replayButton.frame.size.height / 4
-        replayButton.layer.borderColor = UIColor.blue.cgColor
-        replayButton.layer.borderWidth = 3
-
-        timeMassageLabel.layer.borderColor = UIColor.blue.cgColor
+        timeMassageLabel.layer.cornerRadius =   timeMassageLabel.frame.size.height / 4
+        timeMassageLabel.layer.borderColor = UIColor.systemGray2.cgColor
         timeMassageLabel.layer.borderWidth = 3
         
-        goButtonLabel.setTitleColor(UIColor.black, for: UIControl.State.disabled)
-        goButtonLabel.clipsToBounds = true
+        playPauseButton.applyBlueBorder()
+        stopButton.applyBlueBorder()
+        replayButton.applyBlueBorder()
+        massageProgramButton.applyBlueBorder()
+        selectSitButton.applyBlueBorder()
+        memoryButton.applyBlueBorder()
         
-        goButtonLabel.layer.cornerRadius = goButtonLabel.frame.size.height / 4
-        goButtonLabel.layer.borderColor = UIColor.blue.cgColor
-        goButtonLabel.layer.borderWidth = 3
-        goButtonLabel.setTitle("Send", for: .normal)
-        goButtonLabel.isEnabled = false
-        goButtonLabel.setTitleColor(UIColor.black, for: UIControl.State.disabled)
-        goButtonLabel.clipsToBounds = true
-        
-        disconnectButtonLabel.layer.cornerRadius =  disconnectButtonLabel.frame.size.height / 4
-        disconnectButtonLabel.layer.borderColor = UIColor.blue.cgColor
-        disconnectButtonLabel.layer.borderWidth = 3
-        disconnectButtonLabel.clipsToBounds = true
-
-        connectButtonLabel.layer.cornerRadius =  connectButtonLabel.frame.size.height / 4
-        connectButtonLabel.layer.borderColor = UIColor.blue.cgColor
-        connectButtonLabel.layer.borderWidth = 3
-        connectButtonLabel.clipsToBounds = true
+ //       playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        stopButton.isEnabled = false
     
-        massageProgramButton.layer.cornerRadius =  massageProgramButton.frame.size.height / 4
-        massageProgramButton.layer.borderColor = UIColor.blue.cgColor
-        massageProgramButton.layer.borderWidth = 3
-        
-        
+        for index in 0...8 { conturButton[index].applyWhiteBorder()
+        }
     }
     
 
@@ -173,12 +190,12 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
             
             infoLabel.text = "Поиск и установление соединения с сидением \(numberSelectedSit + 1) . . ."
         }
-        else {
+        else {/*
             let alertBTOff = UIAlertController (title: "ВНИМАНИЕ ! Bluetooth выключен !", message: "Для работы приложения необходимо включить в настройках функцию Bluetooth.", preferredStyle: .alert)
             let action = UIAlertAction (title: "OK", style: .default, handler: { _ in exit(0)} )
             alertBTOff.addAction(action)
             present(alertBTOff, animated: true, completion: nil)
- 
+ */
         }
     }
 
@@ -209,7 +226,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
  
     }
     
-    
+/*
     @IBAction func selectSit(_ sender: UISegmentedControl) {
   
         numberSelectedSit = sender.selectedSegmentIndex
@@ -221,6 +238,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         }
         
     }
+  */
     
     func reconnectBT() {
         if peripheral != nil {
@@ -326,14 +344,27 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupGestures()
+ //       setupGestures()
         manager = CBCentralManager(delegate: self, queue: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(changeNameProgramMassage), name: NSNotification.Name("ChangeNPM"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(selectAction), name: NSNotification.Name("ChangeBN"), object: nil)
             
     }
 
-    @objc func changeNameProgramMassage(){
-        massageProgramButton.setTitle(massageNames[massageProgramButtonRow], for: .normal)
+    @objc func selectAction(){
+        
+        switch selectedTable {
+        case 0:
+            selectSitButton.setTitle("Массажное сидение \(selectedTableRow + 1)", for: .normal)
+            numberSelectedSit = selectedTableRow
+            reconnectBT()
+        case 1:
+            massageProgramButton.setTitle(massageNames[selectedTableRow], for: .normal)
+        case 3...11:
+            conturButton[selectedTable-3].setTitle("\(selectedTableRow)", for: .normal)
+        default:
+            break
+        }
+        
         
     }
     
