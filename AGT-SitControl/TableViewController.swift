@@ -17,6 +17,11 @@ class TableViewController: UITableViewController {
         
     }
     
+    // Обработчик если в таблице ничего не выбрано
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("ChangeWhite"), object: nil)
+    }
+    
     // Определяем размер таблицы
     override func viewWillLayoutSubviews() {
         if selectedTable < 3 {

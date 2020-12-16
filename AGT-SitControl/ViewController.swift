@@ -30,11 +30,18 @@ extension UIButton {
         layer.borderColor = UIColor.blue.cgColor
         layer.borderWidth = 3
     }
-    func applyWhiteBorder() {
+    func applyWhiteBorder(_ think : Int) {
         clipsToBounds = true
         layer.cornerRadius =  frame.size.height / 2
         layer.borderColor = UIColor.white.cgColor
-        layer.borderWidth = 2
+        layer.borderWidth = CGFloat(think)
+        setTitleColor(UIColor.white, for: .normal)
+        
+    }
+    func applyWhiteBorder() {
+        layer.borderColor = UIColor.white.cgColor
+        setTitleColor(UIColor.white, for: .normal)
+        
     }
     
 }
@@ -106,15 +113,68 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     @IBAction func selectedButtonTable(_ sender: UIButton) {
         selectedTable = Int(sender.restorationIdentifier!)!
         print("\(selectedTable)")
+        func setRedButton(_ offset: Int){
+            conturButton[selectedTable-3+offset].layer.borderColor = UIColor.red.cgColor
+            conturButton[selectedTable-3+offset].setTitleColor(UIColor.red, for: .normal)
+        }
         switch selectedTable {
         case 0: tappedButton(selectSitButton)
         case 1: tappedButton(massageProgramButton)
         case 2: tappedButton(memoryButton)
-        case 3...20: tappedConturButton(conturButton[selectedTable-3])
-        case 21...25: tappedConturButton(contursButton[selectedTable-21])
+        case 3...7:
+            setRedButton(0)
+            setRedButton(11)
+            tappedConturButton(conturButton[selectedTable-3])
+        case 10...11:
+            setRedButton(0)
+            setRedButton(9)
+            tappedConturButton(conturButton[selectedTable-3])
+        case 8...9, 12...13:
+            setRedButton(0)
+            tappedConturButton(conturButton[selectedTable-3])
+        case 14...18:
+            setRedButton(0)
+            setRedButton(-11)
+            tappedConturButton(conturButton[selectedTable-3])
+        case 19...20:
+            setRedButton(0)
+            setRedButton(-9)
+            tappedConturButton(conturButton[selectedTable-3])
+        case 21:
+            setRedButton(-13)
+            setRedButton(-12)
+            tappedConturButton(contursButton[selectedTable-21])
+        case 22:
+            setRedButton(-17)
+            setRedButton(-12)
+            setRedButton(-11)
+            setRedButton(-6)
+            setRedButton(-3)
+            setRedButton(-2)
+            tappedConturButton(contursButton[selectedTable-21])
+        case 23:
+            for index in -20 ... -3 {
+                setRedButton(index)
+            }
+            tappedConturButton(contursButton[selectedTable-21])
+        case 24:
+            setRedButton(-21)
+            setRedButton(-20)
+            setRedButton(-18)
+            setRedButton(-17)
+            setRedButton(-10)
+            setRedButton(-9)
+            setRedButton(-7)
+            setRedButton(-6)
+            tappedConturButton(contursButton[selectedTable-21])
+        case 25:
+            setRedButton(-13)
+            setRedButton(-12)
+            tappedConturButton(contursButton[selectedTable-21])
         default:
             break
         }
+ 
     }
     
 // Организация всплывающей таблицы выбора программы массажа
@@ -171,7 +231,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
  //       playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         stopButton.isEnabled = false
     
-        for index in 0...17 { conturButton[index].applyWhiteBorder()
+        for index in 0...17 { conturButton[index].applyWhiteBorder(1)
         }
         for index in 0...4 { contursButton[index].applyBlueBorder()
         }
@@ -351,11 +411,64 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
  //       setupGestures()
         manager = CBCentralManager(delegate: self, queue: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(selectAction), name: NSNotification.Name("ChangeBN"), object: nil)
-            
+        NotificationCenter.default.addObserver(self, selector: #selector(selectWhiteBorder), name: NSNotification.Name("ChangeWhite"), object: nil)
     }
 
+    @objc func selectWhiteBorder(){
+        func setWhiteButton(_ offset: Int){
+            conturButton[selectedTable-3+offset].applyWhiteBorder()
+        }
+        switch selectedTable {
+        case 3...7:
+            setWhiteButton(0)
+            setWhiteButton(11)
+        case 10...11:
+            setWhiteButton(0)
+            setWhiteButton(9)
+        case 8...9, 12...13:
+            setWhiteButton(0)
+        case 14...18:
+            setWhiteButton(0)
+            setWhiteButton(-11)
+        case 19...20:
+            setWhiteButton(0)
+            setWhiteButton(-9)
+        case 21:
+            setWhiteButton(-13)
+            setWhiteButton(-12)
+        case 22:
+            setWhiteButton(-17)
+            setWhiteButton(-12)
+            setWhiteButton(-11)
+            setWhiteButton(-6)
+            setWhiteButton(-3)
+            setWhiteButton(-2)
+        case 23:
+            for index in -20 ... -3 {
+                setWhiteButton(index)
+            }
+        case 24:
+            setWhiteButton(-21)
+            setWhiteButton(-20)
+            setWhiteButton(-18)
+            setWhiteButton(-17)
+            setWhiteButton(-10)
+            setWhiteButton(-9)
+            setWhiteButton(-7)
+            setWhiteButton(-6)
+        case 25:
+            setWhiteButton(-13)
+            setWhiteButton(-12)
+        default:
+            break
+        }
+    }
+    
     @objc func selectAction(){
-        
+        func setWhiteButton(_ offset: Int){
+            conturButton[selectedTable-3+offset].applyWhiteBorder(selectedTableRow+1)
+            conturButton[selectedTable-3+offset].setTitle("\(selectedTableRow)", for: .normal)
+        }
         switch selectedTable {
         case 0:
             selectSitButton.setTitle("Массажное сидение \(selectedTableRow + 1)", for: .normal)
@@ -363,8 +476,46 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
             reconnectBT()
         case 1:
             massageProgramButton.setTitle(massageNames[selectedTableRow], for: .normal)
-        case 3...20:
-            conturButton[selectedTable-3].setTitle("\(selectedTableRow)", for: .normal)
+        case 3...7:
+            setWhiteButton(0)
+            setWhiteButton(11)
+        case 10...11:
+            setWhiteButton(0)
+            setWhiteButton(9)
+        case 8...9, 12...13:
+            setWhiteButton(0)
+        case 14...18:
+            setWhiteButton(0)
+            setWhiteButton(-11)
+        case 19...20:
+            setWhiteButton(0)
+            setWhiteButton(-9)
+        case 21:
+            setWhiteButton(-13)
+            setWhiteButton(-12)
+        case 22:
+            setWhiteButton(-17)
+            setWhiteButton(-12)
+            setWhiteButton(-11)
+            setWhiteButton(-6)
+            setWhiteButton(-3)
+            setWhiteButton(-2)
+        case 23:
+            for index in -20 ... -3 {
+                setWhiteButton(index)
+            }
+         case 24:
+            setWhiteButton(-21)
+            setWhiteButton(-20)
+            setWhiteButton(-18)
+            setWhiteButton(-17)
+            setWhiteButton(-10)
+            setWhiteButton(-9)
+            setWhiteButton(-7)
+            setWhiteButton(-6)
+        case 25:
+            setWhiteButton(-13)
+            setWhiteButton(-12)
         default:
             break
         }
