@@ -41,7 +41,7 @@ class TableViewController: UITableViewController {
             return massageNames.count
         case 2:
             return 7
-        case 3...11:
+        case 3...25:
             return 6
         default:
             return 0
@@ -73,7 +73,7 @@ class TableViewController: UITableViewController {
             else {
                 cell.textLabel?.text = "Сохранить настройки в память \(indexPath.row - 2)"
             }
-        case 3...11:
+        case 3...25:
             cell.textLabel?.text = "\(indexPath.row)"
         default:
             break

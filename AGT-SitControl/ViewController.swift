@@ -73,7 +73,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     @IBOutlet var selectSitButton: UIButton!
     @IBOutlet var memoryButton: UIButton!
     @IBOutlet var conturButton: [UIButton]!
-    
+    @IBOutlet var contursButton: [UIButton]!
     
     
     struct Sit {
@@ -110,7 +110,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         case 0: tappedButton(selectSitButton)
         case 1: tappedButton(massageProgramButton)
         case 2: tappedButton(memoryButton)
-        case 3...11: tappedConturButton(conturButton[selectedTable-3])
+        case 3...20: tappedConturButton(conturButton[selectedTable-3])
+        case 21...25: tappedConturButton(contursButton[selectedTable-21])
         default:
             break
         }
@@ -144,7 +145,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         let popOverVC = popVC.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = memoryButton
-        popOverVC?.sourceRect = CGRect(x:  memoryButton.bounds.maxX + 5 , y: memoryButton.bounds.maxY + 155, width: 0, height: 0)
+        popOverVC?.sourceRect = CGRect(x:  memoryButton.bounds.maxX + 17 , y: memoryButton.bounds.maxY + 200, width: 0, height: 0)
         forTableButtonWidth = 28 //button.bounds.width
         self.present(popVC, animated: true)
     }
@@ -170,8 +171,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
  //       playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         stopButton.isEnabled = false
     
-        for index in 0...8 { conturButton[index].applyWhiteBorder()
+        for index in 0...17 { conturButton[index].applyWhiteBorder()
         }
+        for index in 0...4 { contursButton[index].applyBlueBorder()
+        }
+        
     }
     
 
@@ -359,7 +363,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
             reconnectBT()
         case 1:
             massageProgramButton.setTitle(massageNames[selectedTableRow], for: .normal)
-        case 3...11:
+        case 3...20:
             conturButton[selectedTable-3].setTitle("\(selectedTableRow)", for: .normal)
         default:
             break

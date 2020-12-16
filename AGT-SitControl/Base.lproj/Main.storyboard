@@ -129,14 +129,82 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UDL-wF-Yzh">
                                 <rect key="frame" x="5" y="273" width="404" height="589"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N1X-Jj-dYB">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="N1X-Jj-dYB">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="21" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXx-7c-7Gq">
+                                                <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Опора поясницы">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PMW-oO-t6T"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="24" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wo-fZ-TWx">
+                                                <rect key="frame" x="262" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Подушки спины">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i7V-lZ-A8Z"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-t5-puw">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-t5-puw">
                                         <rect key="frame" x="0.0" y="35" width="404" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="22" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGy-7x-iN0">
+                                                <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Боковые опоры">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H5g-nW-PC0"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="25" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7S-15-TTF">
+                                                <rect key="frame" x="262" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Подушки сидения">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="si2-fe-K1k"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ekU-Lc-DJE">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="ekU-Lc-DJE">
                                         <rect key="frame" x="0.0" y="70" width="404" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="23" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQJ-41-nZ3">
+                                                <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Все подушки">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b0r-9X-iJf"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRm-gm-3fc">
+                                                <rect key="frame" x="262" y="0.0" width="142" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3dB-z8-5Uy">
                                         <rect key="frame" x="0.0" y="105" width="404" height="30"/>
@@ -163,6 +231,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a0o-77-kxQ"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -214,6 +285,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aVb-em-SR8"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -226,6 +300,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b5i-Hd-hjG"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcJ-b2-o6Q">
                                                         <rect key="frame" x="89" y="0.0" width="39" height="29.5"/>
@@ -265,6 +342,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ReY-TC-eRH"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -298,6 +378,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cie-uq-u1b"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -354,6 +437,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bfz-1a-6X0"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaa-r2-kKb">
                                                         <rect key="frame" x="76" y="0.0" width="45.5" height="30"/>
@@ -427,6 +513,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hox-mg-tLU"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -439,6 +528,9 @@
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jUt-rh-iyI"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ8-U3-T77">
                                                         <rect key="frame" x="61.5" y="0.0" width="46.5" height="30"/>
@@ -465,6 +557,9 @@
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vng-uM-UE0"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CgE-nQ-qXL">
                                                 <rect key="frame" x="279.5" y="0.0" width="124.5" height="29.5"/>
@@ -533,15 +628,29 @@
                         <outlet property="selectSitButton" destination="b4c-Xq-Hu7" id="JrS-dg-zOG"/>
                         <outlet property="stopButton" destination="hgM-Gl-XNw" id="WIN-fS-pnW"/>
                         <outlet property="timeMassageLabel" destination="yHw-4o-k0P" id="lic-FA-w4a"/>
-                        <outletCollection property="conturButton" destination="hBI-k6-jQ7" collectionClass="NSMutableArray" id="4p4-pU-sMS"/>
-                        <outletCollection property="conturButton" destination="HA5-HJ-Zgy" collectionClass="NSMutableArray" id="EwT-ry-4mq"/>
-                        <outletCollection property="conturButton" destination="Pge-dD-Ygb" collectionClass="NSMutableArray" id="SjI-YX-nT5"/>
-                        <outletCollection property="conturButton" destination="sQ1-EP-1KZ" collectionClass="NSMutableArray" id="QkB-3g-Xsn"/>
-                        <outletCollection property="conturButton" destination="np7-I1-cl9" collectionClass="NSMutableArray" id="NYR-r3-9Q9"/>
-                        <outletCollection property="conturButton" destination="qcT-m8-ybc" collectionClass="NSMutableArray" id="R2r-1D-eRF"/>
-                        <outletCollection property="conturButton" destination="CKl-xc-1UE" collectionClass="NSMutableArray" id="DZo-SG-ggY"/>
-                        <outletCollection property="conturButton" destination="wL3-mn-r88" collectionClass="NSMutableArray" id="aNL-TM-U6o"/>
-                        <outletCollection property="conturButton" destination="MPS-Vd-Eqm" collectionClass="NSMutableArray" id="nsp-EW-Ejc"/>
+                        <outletCollection property="contursButton" destination="gXx-7c-7Gq" collectionClass="NSMutableArray" id="btX-mn-zpd"/>
+                        <outletCollection property="contursButton" destination="QGy-7x-iN0" collectionClass="NSMutableArray" id="ZnP-P7-lK8"/>
+                        <outletCollection property="contursButton" destination="PQJ-41-nZ3" collectionClass="NSMutableArray" id="3iS-wP-pvh"/>
+                        <outletCollection property="contursButton" destination="1Wo-fZ-TWx" collectionClass="NSMutableArray" id="NHl-ef-rMf"/>
+                        <outletCollection property="contursButton" destination="J7S-15-TTF" collectionClass="NSMutableArray" id="xI1-En-rja"/>
+                        <outletCollection property="conturButton" destination="qcT-m8-ybc" collectionClass="NSMutableArray" id="ZvI-vb-jVG"/>
+                        <outletCollection property="conturButton" destination="hBI-k6-jQ7" collectionClass="NSMutableArray" id="ALR-2M-xMd"/>
+                        <outletCollection property="conturButton" destination="HA5-HJ-Zgy" collectionClass="NSMutableArray" id="8Zr-0D-qqB"/>
+                        <outletCollection property="conturButton" destination="CKl-xc-1UE" collectionClass="NSMutableArray" id="Usu-93-Tl1"/>
+                        <outletCollection property="conturButton" destination="wL3-mn-r88" collectionClass="NSMutableArray" id="bLF-Rb-nWP"/>
+                        <outletCollection property="conturButton" destination="Pge-dD-Ygb" collectionClass="NSMutableArray" id="C1O-qT-Jz6"/>
+                        <outletCollection property="conturButton" destination="MPS-Vd-Eqm" collectionClass="NSMutableArray" id="gGi-Lb-va6"/>
+                        <outletCollection property="conturButton" destination="sQ1-EP-1KZ" collectionClass="NSMutableArray" id="RcE-XV-Tfx"/>
+                        <outletCollection property="conturButton" destination="np7-I1-cl9" collectionClass="NSMutableArray" id="ePg-Wc-Vob"/>
+                        <outletCollection property="conturButton" destination="ERg-VO-xmP" collectionClass="NSMutableArray" id="oNc-8Y-YSz"/>
+                        <outletCollection property="conturButton" destination="QvY-LI-wh7" collectionClass="NSMutableArray" id="TMa-mS-I9b"/>
+                        <outletCollection property="conturButton" destination="gKi-hh-W85" collectionClass="NSMutableArray" id="u03-0n-fiH"/>
+                        <outletCollection property="conturButton" destination="S4r-HZ-SK2" collectionClass="NSMutableArray" id="5VE-ip-U5M"/>
+                        <outletCollection property="conturButton" destination="tXA-qg-MPL" collectionClass="NSMutableArray" id="g4c-31-ztu"/>
+                        <outletCollection property="conturButton" destination="bSS-Tq-7mI" collectionClass="NSMutableArray" id="2m6-v8-5Oj"/>
+                        <outletCollection property="conturButton" destination="52F-Ak-rj8" collectionClass="NSMutableArray" id="TOh-XT-m8f"/>
+                        <outletCollection property="conturButton" destination="oNZ-4z-snZ" collectionClass="NSMutableArray" id="n4P-CZ-Mwi"/>
+                        <outletCollection property="conturButton" destination="YvM-qI-EMT" collectionClass="NSMutableArray" id="d3H-5i-Lxo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
