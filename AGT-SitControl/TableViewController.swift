@@ -24,7 +24,7 @@ class TableViewController: UITableViewController {
     
     // Определяем размер таблицы
     override func viewWillLayoutSubviews() {
-        if selectedTable < 3 {
+        if pressedButton < 3 {
           preferredContentSize = CGSize(width:  forTableButtonWidth + 15 , height: tableView.contentSize.height - 15)
         }
         else {
@@ -39,7 +39,7 @@ class TableViewController: UITableViewController {
 
     // Определяем количество строк в секциях
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch selectedTable {
+        switch pressedButton {
         case 0:
             return 8
         case 1:
@@ -63,7 +63,7 @@ class TableViewController: UITableViewController {
         cell.selectedBackgroundView = bgColorView
 
 
-        switch selectedTable {
+        switch pressedButton {
         case 0:
             cell.textLabel?.text = "Массажное сидение  \(indexPath.row + 1)"
         case 1:

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
-var selectedTable = 0
+var pressedButton = 0
 var selectedTableRow = 0
 var forTableButtonWidth : CGFloat = 0
 
@@ -87,6 +87,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         let numberMem = 4
         let numberPads = 11
         
+        var enablePad = [Bool]()
         var pressure = [Int]()
         var pressureMem = [[Int]]()
         
@@ -95,7 +96,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
                 pressureMem.append([])
                 for _ in 0..<numberPads {
                     pressureMem[index].append(0)
-                    pressure.append(0)                }
+                }
+            }
+            for _ in 0..<numberPads {
+                pressure.append(0)
+                enablePad.append(false)
             }
         }
     }
@@ -111,39 +116,39 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     
 // Отображаем соответствующее нажатой кнопке всплывающее меню
     @IBAction func selectedButtonTable(_ sender: UIButton) {
-        selectedTable = Int(sender.restorationIdentifier!)!
-        print("\(selectedTable)")
+        pressedButton = Int(sender.restorationIdentifier!)!
+        print("\(pressedButton)")
         func setRedButton(_ offset: Int){
-            conturButton[selectedTable-3+offset].layer.borderColor = UIColor.red.cgColor
-            conturButton[selectedTable-3+offset].setTitleColor(UIColor.red, for: .normal)
+            conturButton[pressedButton-3+offset].layer.borderColor = UIColor.red.cgColor
+            conturButton[pressedButton-3+offset].setTitleColor(UIColor.red, for: .normal)
         }
-        switch selectedTable {
+        switch pressedButton {
         case 0: tappedButton(selectSitButton)
         case 1: tappedButton(massageProgramButton)
         case 2: tappedButton(memoryButton)
         case 3...7:
             setRedButton(0)
             setRedButton(11)
-            tappedConturButton(conturButton[selectedTable-3])
+            tappedConturButton(conturButton[pressedButton-3])
         case 10...11:
             setRedButton(0)
             setRedButton(9)
-            tappedConturButton(conturButton[selectedTable-3])
+            tappedConturButton(conturButton[pressedButton-3])
         case 8...9, 12...13:
             setRedButton(0)
-            tappedConturButton(conturButton[selectedTable-3])
+            tappedConturButton(conturButton[pressedButton-3])
         case 14...18:
             setRedButton(0)
             setRedButton(-11)
-            tappedConturButton(conturButton[selectedTable-3])
+            tappedConturButton(conturButton[pressedButton-3])
         case 19...20:
             setRedButton(0)
             setRedButton(-9)
-            tappedConturButton(conturButton[selectedTable-3])
+            tappedConturButton(conturButton[pressedButton-3])
         case 21:
             setRedButton(-13)
             setRedButton(-12)
-            tappedConturButton(contursButton[selectedTable-21])
+            tappedConturButton(contursButton[pressedButton-21])
         case 22:
             setRedButton(-17)
             setRedButton(-12)
@@ -151,12 +156,12 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
             setRedButton(-6)
             setRedButton(-3)
             setRedButton(-2)
-            tappedConturButton(contursButton[selectedTable-21])
+            tappedConturButton(contursButton[pressedButton-21])
         case 23:
             for index in -20 ... -3 {
                 setRedButton(index)
             }
-            tappedConturButton(contursButton[selectedTable-21])
+            tappedConturButton(contursButton[pressedButton-21])
         case 24:
             setRedButton(-21)
             setRedButton(-20)
@@ -166,11 +171,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
             setRedButton(-9)
             setRedButton(-7)
             setRedButton(-6)
-            tappedConturButton(contursButton[selectedTable-21])
+            tappedConturButton(contursButton[pressedButton-21])
         case 25:
             setRedButton(-13)
             setRedButton(-12)
-            tappedConturButton(contursButton[selectedTable-21])
+            tappedConturButton(contursButton[pressedButton-21])
         default:
             break
         }
@@ -411,119 +416,89 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
  //       setupGestures()
         manager = CBCentralManager(delegate: self, queue: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(selectAction), name: NSNotification.Name("ChangeBN"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(selectWhiteBorder), name: NSNotification.Name("ChangeWhite"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setTextButtonPads), name: NSNotification.Name("ChangeWhite"), object: nil)
     }
 
-    @objc func selectWhiteBorder(){
-        func setWhiteButton(_ offset: Int){
-            conturButton[selectedTable-3+offset].applyWhiteBorder()
+    @objc func setTextButtonPads(){
+        for index in 0...10 {
+                conturButton[index].applyWhiteBorder(sit[numberSelectedSit].pressure[index]+1)
+                conturButton[index].setTitle("\(sit[numberSelectedSit].pressure[index])", for: .normal)
         }
-        switch selectedTable {
-        case 3...7:
-            setWhiteButton(0)
-            setWhiteButton(11)
-        case 10...11:
-            setWhiteButton(0)
-            setWhiteButton(9)
-        case 8...9, 12...13:
-            setWhiteButton(0)
-        case 14...18:
-            setWhiteButton(0)
-            setWhiteButton(-11)
-        case 19...20:
-            setWhiteButton(0)
-            setWhiteButton(-9)
-        case 21:
-            setWhiteButton(-13)
-            setWhiteButton(-12)
-        case 22:
-            setWhiteButton(-17)
-            setWhiteButton(-12)
-            setWhiteButton(-11)
-            setWhiteButton(-6)
-            setWhiteButton(-3)
-            setWhiteButton(-2)
-        case 23:
-            for index in -20 ... -3 {
-                setWhiteButton(index)
-            }
-        case 24:
-            setWhiteButton(-21)
-            setWhiteButton(-20)
-            setWhiteButton(-18)
-            setWhiteButton(-17)
-            setWhiteButton(-10)
-            setWhiteButton(-9)
-            setWhiteButton(-7)
-            setWhiteButton(-6)
-        case 25:
-            setWhiteButton(-13)
-            setWhiteButton(-12)
-        default:
-            break
+        for index in 11...15 {
+                conturButton[index].applyWhiteBorder(sit[numberSelectedSit].pressure[index-11]+1)
+                conturButton[index].setTitle("\(sit[numberSelectedSit].pressure[index-11])", for: .normal)
+        }
+        for index in 16...17 {
+                conturButton[index].applyWhiteBorder(sit[numberSelectedSit].pressure[index-9]+1)
+                conturButton[index].setTitle("\(sit[numberSelectedSit].pressure[index-9])", for: .normal)
         }
     }
     
+    
     @objc func selectAction(){
-        func setWhiteButton(_ offset: Int, _ savePress: Bool){
-            conturButton[selectedTable-3+offset].applyWhiteBorder(selectedTableRow+1)
-            conturButton[selectedTable-3+offset].setTitle("\(selectedTableRow)", for: .normal)
-            if savePress { sit[numberSelectedSit].pressure[selectedTable-3+offset] = selectedTableRow
-            }
-        }
-        switch selectedTable {
+        switch pressedButton {
         case 0:
             selectSitButton.setTitle("Массажное сидение \(selectedTableRow + 1)", for: .normal)
             numberSelectedSit = selectedTableRow
             reconnectBT()
         case 1:
             massageProgramButton.setTitle(massageNames[selectedTableRow], for: .normal)
-        case 3...7:
-            setWhiteButton(0,true)
-            setWhiteButton(11, false)
-        case 10...11:
-            setWhiteButton(0,true)
-            setWhiteButton(9,false)
-        case 8...9, 12...13:
-            setWhiteButton(0,true)
-        case 14...18:
-            setWhiteButton(0,false)
-            setWhiteButton(-11,true)
-        case 19...20:
-            setWhiteButton(0,false)
-            setWhiteButton(-9,true)
-        case 21:
-            setWhiteButton(-13,true)
-            setWhiteButton(-12,true)
-        case 22:
-            setWhiteButton(-17,true)
-            setWhiteButton(-12,true)
-            setWhiteButton(-11,true)
-            setWhiteButton(-6,false)
-            setWhiteButton(-3,false)
-            setWhiteButton(-2,false)
-        case 23:
-            for index in -20 ... -3 {
-                setWhiteButton(index,true)
+        case 2:
+            switch selectedTableRow {
+            case 0...2:
+                if sit[numberSelectedSit].pressure != sit[numberSelectedSit].pressureMem[selectedTableRow] {
+                    sit[numberSelectedSit].pressureMem[3] = sit[numberSelectedSit].pressure
+                    sit[numberSelectedSit].pressure = sit[numberSelectedSit].pressureMem[selectedTableRow]
+                }
+                setTextButtonPads()
+            case 3...5:
+                sit[numberSelectedSit].pressureMem[selectedTableRow-3] = sit[numberSelectedSit].pressure
+            case 6:
+                if sit[numberSelectedSit].pressureMem[3] != sit[numberSelectedSit].pressure {
+                   sit[numberSelectedSit].pressure = sit[numberSelectedSit].pressureMem[3]
+                }
+                setTextButtonPads()
+            default:
+                break
             }
+        case 3...13:
+            sit[numberSelectedSit].pressure[pressedButton-3] = selectedTableRow
+            setTextButtonPads()
+        case 14...18:
+            sit[numberSelectedSit].pressure[pressedButton-3-11] = selectedTableRow
+            setTextButtonPads()
+        case 19...20:
+            sit[numberSelectedSit].pressure[pressedButton-3-9] = selectedTableRow
+            setTextButtonPads()
+        case 21:
+            sit[numberSelectedSit].pressure[pressedButton-3-13] = selectedTableRow
+            sit[numberSelectedSit].pressure[pressedButton-3-12] = selectedTableRow
+            setTextButtonPads()
+        case 22:
+            sit[numberSelectedSit].pressure[pressedButton-3-17] = selectedTableRow
+            sit[numberSelectedSit].pressure[pressedButton-3-12] = selectedTableRow
+            sit[numberSelectedSit].pressure[pressedButton-3-11] = selectedTableRow
+            setTextButtonPads()
+        case 23:
+            for index in 0...10 {
+                sit[numberSelectedSit].pressure[index] = selectedTableRow
+            }
+            setTextButtonPads()
          case 24:
-            setWhiteButton(-21,true)
-            setWhiteButton(-20,true)
-            setWhiteButton(-18,true)
-            setWhiteButton(-17,true)
-            setWhiteButton(-10,false)
-            setWhiteButton(-9,false)
-            setWhiteButton(-7,false)
-            setWhiteButton(-6,false)
+            sit[numberSelectedSit].pressure[pressedButton-3-21] = selectedTableRow
+            sit[numberSelectedSit].pressure[pressedButton-3-20] = selectedTableRow
+            sit[numberSelectedSit].pressure[pressedButton-3-18] = selectedTableRow
+            sit[numberSelectedSit].pressure[pressedButton-3-17] = selectedTableRow
+            setTextButtonPads()
         case 25:
-            setWhiteButton(-13,true)
-            setWhiteButton(-12,true)
+            sit[numberSelectedSit].pressure[pressedButton-3-13] = selectedTableRow
+            sit[numberSelectedSit].pressure[pressedButton-3-12] = selectedTableRow
+            setTextButtonPads()
         default:
             break
         }
-        
-        
     }
+    
     
     
 }
