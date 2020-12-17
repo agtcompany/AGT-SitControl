@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -132,6 +132,33 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="N1X-Jj-dYB">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="30"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="24" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wo-fZ-TWx">
+                                                <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Подушки спины">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i7V-lZ-A8Z"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="22" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGy-7x-iN0">
+                                                <rect key="frame" x="262" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Боковые опоры">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H5g-nW-PC0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-t5-puw">
+                                        <rect key="frame" x="0.0" y="35" width="404" height="30"/>
+                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="21" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXx-7c-7Gq">
                                                 <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,51 +170,8 @@
                                                     <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PMW-oO-t6T"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="24" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wo-fZ-TWx">
-                                                <rect key="frame" x="262" y="0.0" width="142" height="30"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <state key="normal" title="Подушки спины">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i7V-lZ-A8Z"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-t5-puw">
-                                        <rect key="frame" x="0.0" y="35" width="404" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="22" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGy-7x-iN0">
-                                                <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <state key="normal" title="Боковые опоры">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H5g-nW-PC0"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="25" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7S-15-TTF">
-                                                <rect key="frame" x="262" y="0.0" width="142" height="30"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <state key="normal" title="Подушки сидения">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="si2-fe-K1k"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="ekU-Lc-DJE">
-                                        <rect key="frame" x="0.0" y="70" width="404" height="30"/>
-                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="23" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQJ-41-nZ3">
-                                                <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                <rect key="frame" x="262" y="0.0" width="142" height="30"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Все подушки">
@@ -195,6 +179,22 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b0r-9X-iJf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="ekU-Lc-DJE">
+                                        <rect key="frame" x="0.0" y="70" width="404" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="25" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7S-15-TTF">
+                                                <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Подушки сидения">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectedButtonTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="si2-fe-K1k"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRm-gm-3fc">
@@ -628,11 +628,7 @@
                         <outlet property="selectSitButton" destination="b4c-Xq-Hu7" id="JrS-dg-zOG"/>
                         <outlet property="stopButton" destination="hgM-Gl-XNw" id="WIN-fS-pnW"/>
                         <outlet property="timeMassageLabel" destination="yHw-4o-k0P" id="lic-FA-w4a"/>
-                        <outletCollection property="contursButton" destination="gXx-7c-7Gq" collectionClass="NSMutableArray" id="btX-mn-zpd"/>
-                        <outletCollection property="contursButton" destination="QGy-7x-iN0" collectionClass="NSMutableArray" id="ZnP-P7-lK8"/>
-                        <outletCollection property="contursButton" destination="PQJ-41-nZ3" collectionClass="NSMutableArray" id="3iS-wP-pvh"/>
                         <outletCollection property="contursButton" destination="1Wo-fZ-TWx" collectionClass="NSMutableArray" id="NHl-ef-rMf"/>
-                        <outletCollection property="contursButton" destination="J7S-15-TTF" collectionClass="NSMutableArray" id="xI1-En-rja"/>
                         <outletCollection property="conturButton" destination="qcT-m8-ybc" collectionClass="NSMutableArray" id="ZvI-vb-jVG"/>
                         <outletCollection property="conturButton" destination="hBI-k6-jQ7" collectionClass="NSMutableArray" id="ALR-2M-xMd"/>
                         <outletCollection property="conturButton" destination="HA5-HJ-Zgy" collectionClass="NSMutableArray" id="8Zr-0D-qqB"/>
@@ -651,6 +647,10 @@
                         <outletCollection property="conturButton" destination="52F-Ak-rj8" collectionClass="NSMutableArray" id="TOh-XT-m8f"/>
                         <outletCollection property="conturButton" destination="oNZ-4z-snZ" collectionClass="NSMutableArray" id="n4P-CZ-Mwi"/>
                         <outletCollection property="conturButton" destination="YvM-qI-EMT" collectionClass="NSMutableArray" id="d3H-5i-Lxo"/>
+                        <outletCollection property="contursButton" destination="gXx-7c-7Gq" collectionClass="NSMutableArray" id="btX-mn-zpd"/>
+                        <outletCollection property="contursButton" destination="QGy-7x-iN0" collectionClass="NSMutableArray" id="ZnP-P7-lK8"/>
+                        <outletCollection property="contursButton" destination="J7S-15-TTF" collectionClass="NSMutableArray" id="xI1-En-rja"/>
+                        <outletCollection property="contursButton" destination="PQJ-41-nZ3" collectionClass="NSMutableArray" id="3iS-wP-pvh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -84,8 +84,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     
     
     struct Sit {
-        let numberMem = 3
-        let numberPads = 9
+        let numberMem = 4
+        let numberPads = 11
         
         var pressure = [Int]()
         var pressureMem = [[Int]]()
@@ -95,7 +95,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
                 pressureMem.append([])
                 for _ in 0..<numberPads {
                     pressureMem[index].append(0)
-                }
+                    pressure.append(0)                }
             }
         }
     }
@@ -465,9 +465,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
     }
     
     @objc func selectAction(){
-        func setWhiteButton(_ offset: Int){
+        func setWhiteButton(_ offset: Int, _ savePress: Bool){
             conturButton[selectedTable-3+offset].applyWhiteBorder(selectedTableRow+1)
             conturButton[selectedTable-3+offset].setTitle("\(selectedTableRow)", for: .normal)
+            if savePress { sit[numberSelectedSit].pressure[selectedTable-3+offset] = selectedTableRow
+            }
         }
         switch selectedTable {
         case 0:
@@ -477,45 +479,45 @@ class ViewController: UIViewController, CBCentralManagerDelegate,
         case 1:
             massageProgramButton.setTitle(massageNames[selectedTableRow], for: .normal)
         case 3...7:
-            setWhiteButton(0)
-            setWhiteButton(11)
+            setWhiteButton(0,true)
+            setWhiteButton(11, false)
         case 10...11:
-            setWhiteButton(0)
-            setWhiteButton(9)
+            setWhiteButton(0,true)
+            setWhiteButton(9,false)
         case 8...9, 12...13:
-            setWhiteButton(0)
+            setWhiteButton(0,true)
         case 14...18:
-            setWhiteButton(0)
-            setWhiteButton(-11)
+            setWhiteButton(0,false)
+            setWhiteButton(-11,true)
         case 19...20:
-            setWhiteButton(0)
-            setWhiteButton(-9)
+            setWhiteButton(0,false)
+            setWhiteButton(-9,true)
         case 21:
-            setWhiteButton(-13)
-            setWhiteButton(-12)
+            setWhiteButton(-13,true)
+            setWhiteButton(-12,true)
         case 22:
-            setWhiteButton(-17)
-            setWhiteButton(-12)
-            setWhiteButton(-11)
-            setWhiteButton(-6)
-            setWhiteButton(-3)
-            setWhiteButton(-2)
+            setWhiteButton(-17,true)
+            setWhiteButton(-12,true)
+            setWhiteButton(-11,true)
+            setWhiteButton(-6,false)
+            setWhiteButton(-3,false)
+            setWhiteButton(-2,false)
         case 23:
             for index in -20 ... -3 {
-                setWhiteButton(index)
+                setWhiteButton(index,true)
             }
          case 24:
-            setWhiteButton(-21)
-            setWhiteButton(-20)
-            setWhiteButton(-18)
-            setWhiteButton(-17)
-            setWhiteButton(-10)
-            setWhiteButton(-9)
-            setWhiteButton(-7)
-            setWhiteButton(-6)
+            setWhiteButton(-21,true)
+            setWhiteButton(-20,true)
+            setWhiteButton(-18,true)
+            setWhiteButton(-17,true)
+            setWhiteButton(-10,false)
+            setWhiteButton(-9,false)
+            setWhiteButton(-7,false)
+            setWhiteButton(-6,false)
         case 25:
-            setWhiteButton(-13)
-            setWhiteButton(-12)
+            setWhiteButton(-13,true)
+            setWhiteButton(-12,true)
         default:
             break
         }
