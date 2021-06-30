@@ -44,9 +44,9 @@ class TableViewController: UITableViewController {
             return 8
         case 1:
             return massageNames.count
-        case 2:
-            return 7
-        case 3...25:
+        case 200,201:
+            return 3
+        case 3...28:
             return 6
         default:
             return 0
@@ -68,17 +68,11 @@ class TableViewController: UITableViewController {
             cell.textLabel?.text = "Массажное сидение  \(indexPath.row + 1)"
         case 1:
             cell.textLabel?.text = massageNames[indexPath.row]
-        case 2:
-            if indexPath.row == 6 {
-                cell.textLabel?.text = "Вернуться к текущим настройкам"
-            }
-            else if indexPath.row < 3 {
-                cell.textLabel?.text = "Установить настройки из памяти \(indexPath.row + 1)"
-            }
-            else {
-                cell.textLabel?.text = "Сохранить настройки в память \(indexPath.row - 2)"
-            }
-        case 3...25:
+        case 200:
+            cell.textLabel?.text = "Загрузить настройки из памяти \(indexPath.row + 1)"
+        case 201:
+            cell.textLabel?.text = "Сохранить настройки в память \(indexPath.row + 1)"
+        case 3...28:
             cell.textLabel?.text = "\(indexPath.row)"
         default:
             break
