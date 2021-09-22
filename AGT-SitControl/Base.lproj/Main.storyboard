@@ -156,7 +156,7 @@
                                     <constraint firstAttribute="height" constant="32" id="vqX-uP-bWE"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sit-agt" translatesAutoresizingMaskIntoConstraints="NO" id="OY0-i7-K4n">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sit_agt" translatesAutoresizingMaskIntoConstraints="NO" id="OY0-i7-K4n">
                                 <rect key="frame" x="5" y="278" width="404" height="584"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UDL-wF-Yzh">
@@ -864,10 +864,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Sit-agt" width="1133" height="1753"/>
         <image name="arrow.turn.down.right" catalog="system" width="128" height="99"/>
         <image name="heat0" width="333" height="190"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="sit_agt" width="1133" height="1753"/>
         <image name="stop.fill" catalog="system" width="128" height="113"/>
         <image name="vent0" width="333" height="190"/>
         <systemColor name="systemBackgroundColor">

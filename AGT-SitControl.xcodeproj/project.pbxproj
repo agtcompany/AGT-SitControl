@@ -14,6 +14,8 @@
 		148BAD7A256C42E000DE3B38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148BAD78256C42E000DE3B38 /* Main.storyboard */; };
 		148BAD7C256C42E000DE3B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 148BAD7B256C42E000DE3B38 /* Assets.xcassets */; };
 		148BAD7F256C42E000DE3B38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148BAD7D256C42E000DE3B38 /* LaunchScreen.storyboard */; };
+		14B35C6F26E0D95A0040264F /* MassageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B35C6E26E0D95A0040264F /* MassageData.swift */; };
+		14B35C7126E0DAC50040264F /* InfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B35C7026E0DAC50040264F /* InfoData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		148BAD7B256C42E000DE3B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		148BAD7E256C42E000DE3B38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		148BAD80256C42E000DE3B38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14B35C6E26E0D95A0040264F /* MassageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageData.swift; sourceTree = "<group>"; };
+		14B35C7026E0DAC50040264F /* InfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				148BAD72256C42DF00DE3B38 /* AppDelegate.swift */,
 				148BAD74256C42DF00DE3B38 /* SceneDelegate.swift */,
 				148BAD76256C42DF00DE3B38 /* ViewController.swift */,
+				14B35C7026E0DAC50040264F /* InfoData.swift */,
+				14B35C6E26E0D95A0040264F /* MassageData.swift */,
 				140412E6256C45E6000A9968 /* TableViewController.swift */,
 				148BAD78256C42E000DE3B38 /* Main.storyboard */,
 				148BAD7B256C42E000DE3B38 /* Assets.xcassets */,
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14B35C6F26E0D95A0040264F /* MassageData.swift in Sources */,
 				148BAD77256C42DF00DE3B38 /* ViewController.swift in Sources */,
 				148BAD73256C42DF00DE3B38 /* AppDelegate.swift in Sources */,
+				14B35C7126E0DAC50040264F /* InfoData.swift in Sources */,
 				148BAD75256C42DF00DE3B38 /* SceneDelegate.swift in Sources */,
 				140412E7256C45E6000A9968 /* TableViewController.swift in Sources */,
 			);
